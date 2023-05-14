@@ -18,17 +18,34 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
   @override
   Widget build(BuildContext c) {
     return Scaffold(
-      body: Center(
-        child: ElevatedButton(
-          child: const Text('VIEW ANIMATING LISTVIEW'),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => SlideAnimation1()),
-            );
-          },
-        ),
+      body: Column(
+        children: [
+          Center(
+            child: ElevatedButton(
+              child: const Text('VIEW ANIMATING LISTVIEW'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SlideAnimation1()),
+                );
+              },
+            ),
+          ),
+
+          Center(
+            child: ElevatedButton(
+              child: const Text('MAIN PAGE'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyHomePage()),
+                );
+              },
+            ),
+          ),
+        ],
       ),
+
     );
   }
 }
@@ -39,7 +56,7 @@ class SlideAnimation1 extends StatelessWidget {
     double _w = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-          title: Text("Go Back"),
+          title: Text("Answers"),
           centerTitle: true,
           brightness: Brightness.dark),
       body: AnimationLimiter(
@@ -47,7 +64,7 @@ class SlideAnimation1 extends StatelessWidget {
           padding: EdgeInsets.all(_w / 30),
           physics:
               BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-          itemCount: 7,
+          itemCount: 3,
           itemBuilder: (BuildContext c, int i) {
             return AnimationConfiguration.staggeredList(
               position: i,

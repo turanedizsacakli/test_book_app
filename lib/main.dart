@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:test_book_app/screens/animation.dart';
-
 import 'screens/myhomepage.dart';
 
 void main() {
