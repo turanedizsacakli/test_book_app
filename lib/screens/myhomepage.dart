@@ -34,28 +34,6 @@ class _MyHomePageState extends State<MyHomePage> {
           Expanded(
             child: ListView(
               children: <Widget>[
-
-                //buradan
-                /*SingleChildScrollView(
-                    child: Container(
-                        child: Center(
-                            child: Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Column(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.spaceEvenly,
-                                  children: <Widget>[
-                                    const Card(
-                                        elevation: 16,
-                                        child: ListTile(
-                                          leading: Icon(Icons.album),
-                                          title: Text('Sample Card 3'),
-                                          subtitle: Text('Elevation - 16'),
-                                        )),
-                                  ],
-                                ))))),*/
-                //buraya kadar
-
                 Center(
                     child: Card(
                       elevation: 16,
@@ -70,22 +48,18 @@ class _MyHomePageState extends State<MyHomePage> {
                     )),
                 SizedBox(height: 15,),
                 buildOption("A", "A", "B ŞIKKI DOĞRUDUR..."),
-                SizedBox(height: 15,),
                 buildOption("B", "B", "D ŞIKKI YANLIŞTIR..."),
-                SizedBox(height: 15,),
                 buildOption("C", "C", "TÜM ŞIKLAR YANLIŞTIR..."),
-                SizedBox(height: 15,),
                 buildOption("D", "D", "A ŞIKKI YANLIŞTIR..."),
-                SizedBox(height: 15,),
                 buildOption("E", "E", "..."),
-                SizedBox(height: 15,),
 
-                //Cevap Yazısı
+
+                //Doğru Cevap Yazısı
 /*
                 Center(
                     child: RichText(
                         text: TextSpan(
-                            text: "Cevap : ",
+                            text: "Doğru Cevap : ",
                             style: DefaultTextStyle.of(context).style,
                             children: <TextSpan>[
                               TextSpan(
@@ -94,51 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             ]))),
 */
 
-
-
-                /*// U P D A T E BUTTON...
-
-    Flexible(
-    fit: FlexFit.tight,
-    flex: 3,
-    child: ElevatedButton(
-    onPressed: () {
-    Navigator.push(context, MaterialPageRoute(builder: (context)=> StudentEdit(selectedStudent)));
-    },
-    child: Row(
-    children: [
-    Icon(Icons.update),
-    SizedBox(width: 5.0),
-    Text(" UPDATE ", style: TextStyle( fontSize: 12, color: Colors.white,backgroundColor: Colors.yellow),
-    ),
-    ],
-    ),
-    ),
-    ),
-    SizedBox(width: 2.0),
-
-    // D E L E T E BUTTON...
-
-    Flexible(
-    fit: FlexFit.tight,
-    flex: 2,
-    child: ElevatedButton(
-    onPressed: () {
-    setState(() {
-    students.remove(selectedStudent);
-    var Message = selectedStudent.firstName! + " deleted...!!!";
-    messageAlert(context, Message);
-    });
-    },
-    child: Row(
-    children: [
-    Icon(Icons.delete),
-    SizedBox(width: 5.0),
-    Text(" DELETE ", style: TextStyle( fontSize: 12, color: Colors.white,backgroundColor: Colors.red),
-    ),
-    ],
-    ),*/
-              ],
+             ],
             ),
           ),
         ],
@@ -149,6 +79,8 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Row(children: [
             // A D D BUTTON...
             //Flexible(
+
+            //Cevabı Butonu
             Expanded(
               //fit: FlexFit.tight,
               //flex: 2,
@@ -167,9 +99,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         Icon(Icons.question_mark),
                         SizedBox(width: 5.0),
                         Text(
-                          " CEVABI ",
+                          " SORUNUN CEVABI ",
                           style: TextStyle(
-                              fontSize: 12, color: Colors.white),
+                              fontSize: 16, color: Colors.white),
                         ),
                       ],
                     ),
@@ -177,6 +109,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
+
+            //login button
             Expanded(
               //fit: FlexFit.tight,
               //flex: 2,
@@ -195,9 +129,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         Icon(Icons.question_mark),
                         SizedBox(width: 5.0),
                         Text(
-                          " CEVABI ",
+                          " GİRİŞ YAP ",
                           style: TextStyle(
-                              fontSize: 12, color: Colors.white),
+                              fontSize: 16, color: Colors.white),
                         ),
                       ],
                     ),
@@ -205,6 +139,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
+
+
             SizedBox(width: 2.0),
           ]),
         )
@@ -212,35 +148,41 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget buildOption(String label, String value, String question) {
-    return Card(
-      elevation: 16,
-      child: Row(
-          //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-            Container(
-              child: RichText(
-                  text: TextSpan(
-                    text: label,
-                    style: TextStyle(fontSize: 30, color: Colors.blue,fontWeight: FontWeight.bold,),
-                  )),
-            ),
-            Container(
-              child: Radio(
-                  value: value,
-                  groupValue: _group2SelectedValue,
-                  onChanged: _group2Changes),
-            ),
-            Container(
-              child: RichText(
-                  text: TextSpan(
-                    text: question,
-                    style: TextStyle(fontSize: 25, color: Colors.blue,fontWeight: FontWeight.bold,),
-                  )),
-            ),
-          ],
-        ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 9,vertical: 7),
+      child: Card(
+        elevation: 16,
+        child: Row(
+            //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+              Container(
+                child: RichText(
+                    text: TextSpan(
+                      //text:()=>textBuild(label),
+                      text: label,
+                      style: TextStyle(fontSize: 30, color: Colors.blue,fontWeight: FontWeight.bold,),
+                    )),
+              ),
 
+              Container(
+                child: Radio(
+                    value: value,
+                    groupValue: _group2SelectedValue,
+                    onChanged: _group2Changes),
+              ),
+
+             Container(
+                child: RichText(
+                    text: TextSpan(
+                      text: question,
+                      style: TextStyle(fontSize: 25, color: Colors.blue,fontWeight: FontWeight.bold,),
+                    )),
+              ),
+            ],
+          ),
+
+      ),
     );
   }
 
@@ -249,66 +191,14 @@ class _MyHomePageState extends State<MyHomePage> {
       _group2SelectedValue = value;
     });
   }
+
+/*  textBuild(String label) {
+    if(label=="A"){
+    return Icon(Icons.question_mark);
+  };
+  }*/
+
 }
-
-/* *************** START*****************
-
-
-class LCard extends StatelessWidget {
-  const LCard({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-
-                const Card(
-                    elevation: 16,
-                    child: ListTile(
-                      leading: Icon(Icons.album),
-                      title: Text('Sample Card 3'),
-                      subtitle: Text('Elevation - 16'),
-                    )),
-
-                Stack(
-                  children: const <Widget>[
-                    Card(
-                        child: ListTile(
-                          leading: Icon(Icons.camera),
-                          title: Text('Sample Card 1 in Stack'),
-                          subtitle: Text('Default Elevation'),
-                        )),
-
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(16.0, 32, 16, 16),
-                      child: Card(
-                          elevation: 16,
-                          child: ListTile(
-                            leading: Icon(Icons.album),
-                            title: Text('Sample Card 3 in Stack'),
-                            subtitle: Text('Elevation - 16'),
-                          )),
-                    ),
-
-
-                  ],
-                )
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
- */
 
 
 
