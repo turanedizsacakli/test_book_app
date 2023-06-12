@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "882973986066",
+    "firebase_url": "https://newdeneme-e0a61-default-rtdb.firebaseio.com",
+    "project_id": "newdeneme-e0a61",
+    "storage_bucket": "newdeneme-e0a61.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:882973986066:android:362b054d2eec797b5ab7cb",
+        "android_client_info": {
+          "package_name": "com.example.test_book_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "882973986066-sqea0ru03s62dpvvo7pg3vv3e1pp9m42.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdWgXEikDTXWXz88yPWVAO9EpAZWL-iK8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "882973986066-sqea0ru03s62dpvvo7pg3vv3e1pp9m42.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
