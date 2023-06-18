@@ -24,41 +24,38 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Test Book App"),
-      ),
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Expanded(
-            child: ListView(
-              children: <Widget>[
-                Center(
-                    child: Card(
-                      elevation: 16,
-                      margin: EdgeInsets.all(20),
-                      child: RichText(
-                          textAlign: TextAlign.center,
-                          text: TextSpan(
+        appBar: AppBar(
+          title: const Text("Test Book App"),
+        ),
+        body: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Expanded(
+              child: ListView(
+                children: <Widget>[
+                  Center(
+                      child: Card(
+                        elevation: 16,
+                        margin: EdgeInsets.all(20),
+                        child: RichText(
+                            textAlign: TextAlign.center,
+                            text: TextSpan(
                               text: "AŞAĞIDAKİLERDEN HANGİSİ DOĞRUDUR? ",
                               style: const TextStyle(fontSize: 30, color: Colors.blue,fontWeight: FontWeight.bold,),
                               //children: <TextSpan>[TextSpan(text: '$_group2SelectedValue ',style: TextStyle(fontSize: 30)),]
                             )),
-                    )),
-                SizedBox(height: 15,),
-                buildOption("A", "A",
-                    Text(document['isim'])
-                    ),
-                //"B ŞIKKI DOĞRUDUR..."
-                buildOption("B", "B", "D ŞIKKI YANLIŞTIR..."),
-                buildOption("C", "C", "TÜM ŞIKLAR YANLIŞTIR..."),
-                buildOption("D", "D", "A ŞIKKI YANLIŞTIR..."),
-                buildOption("E", "E", "..."),
+                      )),
+                  SizedBox(height: 15,),
+                  buildOption("A", "A", "B ŞIKKI DOĞRUDUR..."),
+                  buildOption("B", "B", "D ŞIKKI YANLIŞTIR..."),
+                  buildOption("C", "C", "TÜM ŞIKLAR YANLIŞTIR..."),
+                  buildOption("D", "D", "A ŞIKKI YANLIŞTIR..."),
+                  buildOption("E", "E", "..."),
 
 
-                //Doğru Cevap Yazısı
+                  //Doğru Cevap Yazısı
 /*
                 Center(
                     child: RichText(
@@ -72,11 +69,11 @@ class _MyHomePageState extends State<MyHomePage> {
                             ]))),
 */
 
-             ],
+                ],
+              ),
             ),
-          ),
-        ],
-      ),
+          ],
+        ),
 
         bottomNavigationBar:Container(
           height: 50,
