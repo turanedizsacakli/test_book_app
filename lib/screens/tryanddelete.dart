@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:test_book_app/screens/animation.dart';
 
@@ -48,7 +49,8 @@ class _MyHomePageState extends State<MyHomePage> {
                             )),
                       )),
                   SizedBox(height: 15,),
-                  buildOption("A", "A", "B ŞIKKI DOĞRUDUR..."),
+                  buildOption("A", "A","selam"),
+                  //"B ŞIKKI DOĞRUDUR..."
                   buildOption("B", "B", "D ŞIKKI YANLIŞTIR..."),
                   buildOption("C", "C", "TÜM ŞIKLAR YANLIŞTIR..."),
                   buildOption("D", "D", "A ŞIKKI YANLIŞTIR..."),
@@ -148,103 +150,45 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget buildOption(String label, String value, String question) {
-    return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection('testbookapp').snapshots(),
-      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (snapshot.hasError) return new Text('Error: ${snapshot.error}');
-        switch (snapshot.connectionState) {
-          case ConnectionState.waiting:
-            return new Text('Loading...');
-          default:
-            return ListView(
-                children:
-                snapshot.data!.docs.map((DocumentSnapshot document) {
-
-                  //return ListTile(title: Text(document['isim']), subtitle: Text(document['oy'].toString()));
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 9,vertical: 7),
-                    child: Card(
-                      elevation: 16,
-                      child: Row(
-                        //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                            child: RichText(
-                                text: TextSpan(
-                                  //text:()=>textBuild(label),
-                                  text: label,
-                                  style: TextStyle(fontSize: 30, color: Colors.blue,fontWeight: FontWeight.bold,),
-                                )),
-                          ),
-
-                          Container(
-                            child: Radio(
-                                value: value,
-                                groupValue: _group2SelectedValue,
-                                onChanged: _group2Changes),
-                          ),
-
-                          Container(
-                            child: RichText(
-                                text: TextSpan(
-                                  text: question,
-                                  style: TextStyle(fontSize: 25, color: Colors.blue,fontWeight: FontWeight.bold,),
-                                )),
-                          ),
-                        ],
-                      ),
-
-                    ),
-                  );
-
-                }).toList()
-            );
-        }
-      },
-    );
-  }
 
   //before
-  /*Widget buildOption(String label, String value, String question) {
+  Widget buildOption(String label, String value, String question) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 9,vertical: 7),
       child: Card(
         elevation: 16,
         child: Row(
-            //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-              Container(
-                child: RichText(
-                    text: TextSpan(
-                      //text:()=>textBuild(label),
-                      text: label,
-                      style: TextStyle(fontSize: 30, color: Colors.blue,fontWeight: FontWeight.bold,),
-                    )),
-              ),
+            Container(
+              child: RichText(
+                  text: TextSpan(
+                    //text:()=>textBuild(label),
+                    text: label,
+                    style: TextStyle(fontSize: 30, color: Colors.blue,fontWeight: FontWeight.bold,),
+                  )),
+            ),
 
-              Container(
-                child: Radio(
-                    value: value,
-                    groupValue: _group2SelectedValue,
-                    onChanged: _group2Changes),
-              ),
+            Container(
+              child: Radio(
+                  value: value,
+                  groupValue: _group2SelectedValue,
+                  onChanged: _group2Changes),
+            ),
 
-             Container(
-                child: RichText(
-                    text: TextSpan(
-                      text: question,
-                      style: TextStyle(fontSize: 25, color: Colors.blue,fontWeight: FontWeight.bold,),
-                    )),
-              ),
-            ],
-          ),
+            Container(
+              child: RichText(
+                  text: TextSpan(
+                    text: question,
+                    style: TextStyle(fontSize: 25, color: Colors.blue,fontWeight: FontWeight.bold,),
+                  )),
+            ),
+          ],
+        ),
       ),
     );
   }
-*/
 
 
   void _group2Changes(String? value) {

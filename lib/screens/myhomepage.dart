@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:test_book_app/screens/animation.dart';
 
@@ -20,8 +21,27 @@ class _MyHomePageState extends State<MyHomePage> {
     _group2SelectedValue = "A";
     super.initState();
   }
-
   @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<QuerySnapshot>(
+      stream: FirebaseFirestore.instance.collection('dilanketi').snapshots(),
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (snapshot.hasError) return new Text('Error: ${snapshot.error}');
+        switch (snapshot.connectionState) {
+          case ConnectionState.waiting:
+            return new Text('Loading...');
+          default:
+            return ListView(
+                children:
+                snapshot.data!.docs.map((DocumentSnapshot document) {
+                  return ListTile(title: Text(document['Sayfa1.1.answer']), subtitle: Text(document['Sayfa1.1.question'].toString()));
+                }).toList()
+            );
+        }
+      },
+    );
+  }
+ /* @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -48,9 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             )),
                     )),
                 SizedBox(height: 15,),
-                buildOption("A", "A",
-                    Text(document['isim'])
-                    ),
+                buildOption("A", "A","selam"),
                 //"B ŞIKKI DOĞRUDUR..."
                 buildOption("B", "B", "D ŞIKKI YANLIŞTIR..."),
                 buildOption("C", "C", "TÜM ŞIKLAR YANLIŞTIR..."),
@@ -59,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
                 //Doğru Cevap Yazısı
-/*
+*//*
                 Center(
                     child: RichText(
                         text: TextSpan(
@@ -70,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   text: '$_group2SelectedValue ',
                                   style: TextStyle(fontSize: 30)),
                             ]))),
-*/
+*//*
 
              ],
             ),
@@ -151,66 +169,9 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget buildOption(String label, String value, String question) {
-    return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection('testbookapp').snapshots(),
-      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (snapshot.hasError) return new Text('Error: ${snapshot.error}');
-        switch (snapshot.connectionState) {
-          case ConnectionState.waiting:
-            return new Text('Loading...');
-          default:
-            return ListView(
-                children:
-                snapshot.data!.docs.map((DocumentSnapshot document) {
-
-                  //return ListTile(title: Text(document['isim']), subtitle: Text(document['oy'].toString()));
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 9,vertical: 7),
-                    child: Card(
-                      elevation: 16,
-                      child: Row(
-                        //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                            child: RichText(
-                                text: TextSpan(
-                                  //text:()=>textBuild(label),
-                                  text: label,
-                                  style: TextStyle(fontSize: 30, color: Colors.blue,fontWeight: FontWeight.bold,),
-                                )),
-                          ),
-
-                          Container(
-                            child: Radio(
-                                value: value,
-                                groupValue: _group2SelectedValue,
-                                onChanged: _group2Changes),
-                          ),
-
-                          Container(
-                            child: RichText(
-                                text: TextSpan(
-                                  text: question,
-                                  style: TextStyle(fontSize: 25, color: Colors.blue,fontWeight: FontWeight.bold,),
-                                )),
-                          ),
-                        ],
-                      ),
-
-                    ),
-                  );
-
-                }).toList()
-            );
-        }
-      },
-    );
-  }
 
   //before
-  /*Widget buildOption(String label, String value, String question) {
+  Widget buildOption(String label, String value, String question) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 9,vertical: 7),
       child: Card(
@@ -247,7 +208,6 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-*/
 
 
   void _group2Changes(String? value) {
@@ -256,7 +216,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-/*  textBuild(String label) {
+*//*  textBuild(String label) {
     if(label=="A"){
     return Icon(Icons.question_mark);
   };
@@ -265,13 +225,13 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 //my copy pace from another my project
+
 /*
 class SurveyList extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection('testbookapp').snapshots(),
+      stream: FirebaseFirestore.instance.collection('dilanketi').snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) return new Text('Error: ${snapshot.error}');
         switch (snapshot.connectionState) {
@@ -281,52 +241,11 @@ class SurveyList extends StatelessWidget {
             return ListView(
                 children:
                 snapshot.data!.docs.map((DocumentSnapshot document) {
-
-                  //return ListTile(title: Text(document['isim']), subtitle: Text(document['oy'].toString()));
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 9,vertical: 7),
-                    child: Card(
-                      elevation: 16,
-                      child: Row(
-                        //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                            child: RichText(
-                                text: TextSpan(
-                                  //text:()=>textBuild(label),
-                                  text: label,
-                                  style: TextStyle(fontSize: 30, color: Colors.blue,fontWeight: FontWeight.bold,),
-                                )),
-                          ),
-
-                          Container(
-                            child: Radio(
-                                value: value,
-                                groupValue: _group2SelectedValue,
-                                onChanged: _group2Changes),
-                          ),
-
-                          Container(
-                            child: RichText(
-                                text: TextSpan(
-                                  text: question,
-                                  style: TextStyle(fontSize: 25, color: Colors.blue,fontWeight: FontWeight.bold,),
-                                )),
-                          ),
-                        ],
-                      ),
-
-                    ),
-                  );
-
+                  return ListTile(title: Text(document['answer']), subtitle: Text(document['question'].toString()));
                 }).toList()
             );
         }
       },
     );
   }
-
-
-}
-*/
+}*/
