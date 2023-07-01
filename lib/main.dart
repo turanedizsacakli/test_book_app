@@ -64,88 +64,35 @@ class _QuestionPageState extends State<QuestionPage> {
       appBar: AppBar(
         title: Text("Flutter Firebase Demo"),
       ),
-      body: FutureBuilder<Event>(
+      body: FutureBuilder<DatabaseEvent>(
         future: dbRef.orderByChild('id').equalTo(1).limitToFirst(1).once(),
-        builder: (BuildContext context, AsyncSnapshot<Event> snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<DatabaseEvent> snapshot) {
           if (snapshot.hasData) {
             Map<dynamic, dynamic>? values =
             snapshot.data?.snapshot.value as Map<dynamic, dynamic>?;
             if (values != null) {
+
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    "Soru " + (values["id"]?.toString() ?? ""),
-                    style: TextStyle(
-                      fontSize: 24.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 8.0,
-                  ),
-                  Text(
-                    values["question"]?.toString() ?? "",
-                    style: TextStyle(
-                      fontSize: 20.0,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 16.0,
-                  ),
-                  Text(
-                    "A: " + (values["A"]?.toString() ?? ""),
-                    style: TextStyle(
-                      fontSize: 16.0,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 8.0,
-                  ),
-                  Text(
-                    "B: " + (values["B"]?.toString() ?? ""),
-                    style: TextStyle(
-                      fontSize: 16.0,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 8.0,
-                  ),
-                  Text(
-                    "C: " + (values["C"]?.toString() ?? ""),
-                    style: TextStyle(
-                      fontSize: 16.0,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 8.0,
-                  ),
-                  Text(
-                    "D: " + (values["D"]?.toString() ?? ""),
-                    style: TextStyle(
-                      fontSize: 16.0,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 8.0,
-                  ),
-                  Text(
-                    "E: " + (values["E"]?.toString() ?? ""),
-                    style: TextStyle(
-                      fontSize: 16.0,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 16.0,
-                  ),
-                  Text(
-                    "Cevap: " + (values["answer"]?.toString() ?? ""),
-                    style: TextStyle(
-                      fontSize: 20.0,
-                    ),
-                  ),
+                  Text("Soru " + (values["id"]?.toString() ?? ""),style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold,),),
+                  SizedBox(height: 8.0,),
+                  Text( values["question"]?.toString() ?? "", style: TextStyle( fontSize: 20.0,), ),
+                  SizedBox(height: 16.0,),
+                  Text("A: " + (values["A"]?.toString() ?? ""), style: TextStyle(fontSize: 16.0,),),
+                  SizedBox(height: 8.0,),
+                  Text("B: " + (values["B"]?.toString() ?? ""), style: TextStyle(fontSize: 16.0,),),
+                  SizedBox(height: 8.0,),
+                  Text("C: " + (values["C"]?.toString() ?? ""), style: TextStyle(fontSize: 16.0,),),
+                  SizedBox(height: 8.0,),
+                  Text("D: " + (values["D"]?.toString() ?? ""), style: TextStyle(fontSize: 16.0,),),
+                  SizedBox(height: 8.0,),
+                  Text("E: " + (values["E"]?.toString() ?? ""), style: TextStyle(fontSize: 16.0,),),
+                  SizedBox(height: 16.0,),
+                  Text("Cevap: " + (values["answer"]?.toString() ?? ""), style: TextStyle(fontSize: 20.0,),),
                 ],
               );
+
             }
           } else if (snapshot.hasError) {
             return Center(
@@ -154,6 +101,7 @@ class _QuestionPageState extends State<QuestionPage> {
               ),
             );
           }
+
           return Center(
             child: CircularProgressIndicator(),
           );
